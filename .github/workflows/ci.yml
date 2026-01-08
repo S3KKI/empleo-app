@@ -1,4 +1,4 @@
-name: CI
+name: CI - Calidad y Seguridad
 
 on:
   push:
@@ -7,24 +7,38 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-test-sonar:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      # 1️⃣ Descargar código
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Use Node.js 20
+      # 2️⃣ Usar Node.js compatible con Vite
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
+          cache: npm
 
+      # 3️⃣ Instalar dependencias
       - name: Install dependencies
         run: npm install
 
-      - name: Build project
-        run: npm run build
+      # 4️⃣ Ejecutar pruebas unitarias + cobertura
+      - name: Run unit tests with coverage
+        run: npm run test
 
+      # 5️⃣ Verificar que el reporte de cobertura existe (debug)
+      - name: Check coverage report
+        run: |
+          echo "Contenido de coverage:"
+          ls -la coverage
+          echo "Archivo lcov:"
+          ls -la coverage/lcov.info
+
+      # 6️⃣ Análisis de calidad y seguridad con SonarCloud
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
         env:
