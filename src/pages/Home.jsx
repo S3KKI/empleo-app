@@ -1,17 +1,18 @@
-import Header from "../components/Header";
-import JobSearch from "../components/JobSearch";
-import JobPost from "../components/JobPost";
+import Navbar from "../components/Navbar";
+import LeftSidebar from "../components/LeftSidebar";
+import Feed from "../components/Feed";
+import RightSidebar from "../components/RightSidebar";
 
-const Home = () => {
+export default function Home() {
     return (
-        <>
-            <Header />
-            <main style={{ padding: "20px" }}>
-                <JobSearch />
-                <JobPost />
-            </main>
-        </>
-    );
-};
+        <div className="min-h-screen bg-[#f3f2ef]">
+            <Navbar />
 
-export default Home;
+            <div className="max-w-7xl mx-auto px-4 py-6 flex gap-6">
+                <LeftSidebar />
+                <Feed />
+                <RightSidebar />
+            </div>
+        </div>
+    );
+}

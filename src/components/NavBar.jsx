@@ -1,19 +1,30 @@
-export default function Navbar({ setView }) {
+export default function Navbar() {
     return (
-        <nav className="bg-white shadow-sm px-6 py-4 flex justify-between items-center">
-            <h1
-                className="text-2xl font-bold text-blue-600 cursor-pointer"
-                onClick={() => setView("home")}
-            >
-                Empleo<span className="text-gray-800">App</span>
-            </h1>
+        <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
+            <div className="max-w-7xl mx-auto h-14 px-4 flex items-center justify-between">
 
-            <button
-                onClick={() => setView("post")}
-                className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
-            >
-                Publicar empleo
-            </button>
-        </nav>
+                <h1 className="text-blue-700 font-bold text-lg">
+                    empleo
+                </h1>
+
+                <input
+                    type="text"
+                    placeholder="Buscar"
+                    className="hidden md:block bg-gray-100 rounded-md px-3 py-1 text-sm w-72 outline-none"
+                />
+
+                <nav className="flex gap-8 text-xs text-gray-600">
+                    {["Inicio", "Empleos", "Mensajes", "Perfil"].map(item => (
+                        <span
+                            key={item}
+                            className="hover:text-black cursor-pointer"
+                        >
+                            {item}
+                        </span>
+                    ))}
+                </nav>
+
+            </div>
+        </header>
     );
 }
